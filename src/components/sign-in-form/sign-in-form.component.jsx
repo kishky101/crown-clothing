@@ -1,9 +1,9 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
-import { signInUserWithEmailAndPassword, signInWithGooglePopup, createUserDocumentFromAuth } from "../../utils/firebase/firebase.util";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import { signInUserWithEmailAndPassword, signInWithGooglePopup } from "../../utils/firebase/firebase.util";
 
-import './sign-in-form.styles.scss'
+import {SignInContainer, SignInHeader, SignInButtonContainer} from './sign-in-form.styles'
 
 const defaultSignInFields = {
     email: '',
@@ -20,7 +20,7 @@ const SignInForm = () => {
     const signInonSubmitHandler = async (event) => {
         event.preventDefault()
         try {
-            const {user} = await signInUserWithEmailAndPassword(email, password);
+            await signInUserWithEmailAndPassword(email, password);
         } catch (error) {
             switch(error.code) {
                 case 'auth/wrong-password':
@@ -47,8 +47,8 @@ const SignInForm = () => {
         setSignInFields({...signInFields, [name]: value})
     }
     return (
-        <div className= 'sign-in-container'>
-            <h2>I already have an account</h2>
+        <SignInContainer>
+            <SignInHeader>I already have an account</SignInHeader>
             <span>Sign in with your Email and Password</span>
             <form onSubmit={signInonSubmitHandler}>
                 <FormInput 
@@ -67,12 +67,12 @@ const SignInForm = () => {
                     required
                     value= {password} 
                 />
-                <div className="sign-in-button-container">
+                <SignInButtonContainer>
                     <Button type='submit' >Sign in</Button>
-                    <Button type='button' onClick={logGoogleUser} buttonTypes='google'>google sign in</Button>
-                </div>
+                    <Button type='button' onClick={logGoogleUser} buttonTypes={BUTTON_TYPE_CLASSES.google}>google sign in</Button>
+                </SignInButtonContainer>
             </form>
-        </div>
+        </SignInContainer>
     )
 }
 
