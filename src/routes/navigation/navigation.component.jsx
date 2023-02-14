@@ -1,24 +1,32 @@
 import { Outlet } from "react-router-dom";
+import { signOutUser } from "../../utils/firebase/firebase.util";
+
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
-import { useContext } from "react";
-import { UserContext } from "../../context/user.context";
-import { CartDropdownContext } from '../../context/cart-dropdown.context';
-import { signOutUser } from "../../utils/firebase/firebase.util";
+
+import { useSelector, useDispatch } from "react-redux";
+import { SelectCurrentUser } from "../../store/user/user.selector";
+import { userSignOutStart } from "../../store/user/user.action";
+//import { useContext } from "react";
+//import { UserContext } from "../../context/user.context";
+//import { CartDropdownContext } from '../../context/cart-dropdown.context';
+import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigation.styles'
 
+
 const Navigation = () => {
 
-    const { currentUser } = useContext(UserContext);
+    const currentUser = useSelector(SelectCurrentUser)
+    const isCartOpen = useSelector(selectIsCartOpen)
+
+   // const { currentUser } = useContext(UserContext);
   
-    const { cartDropdown } = useContext(CartDropdownContext);
+    //const { cartDropdown } = useContext(CartDropdownContext);
+    const dispatch = useDispatch()
 
-
-    const signOutHandler = async () => {
-        await signOutUser();
-    }
+    const signOutHandler = () => dispatch(userSignOutStart())
 
     return (
       <>
@@ -40,7 +48,7 @@ const Navigation = () => {
                 }
                   <CartIcon />
             </NavLinks>
-          {cartDropdown && <CartDropdown />}
+          {isCartOpen && <CartDropdown />}
         </NavigationContainer>
         <Outlet />
       </>
