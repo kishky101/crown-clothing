@@ -7,8 +7,18 @@ import Category from "../category/category.component";
 import { fetchCategoriesStart } from "../../store/categories/categories.action";
 
 const Shop = () => {
-
     const dispatch = useDispatch()
+    // useEffect(() => {
+    //     const getCategoryMap = async () => {
+    //         const categoryMap = await getCategoriesAndDocuments();
+    //         dispatch(setCategoriesMap(categoryMap))
+    //     }
+
+    //     getCategoryMap()
+    // }, [])
+
+
+    // const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchCategoriesStart());

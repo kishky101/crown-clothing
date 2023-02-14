@@ -16,8 +16,20 @@ import Checkout from "./routes/checkout/checkout.component";
 
 
 const App = () => {
+  const dispatch = useDispatch()
+  
+//   useEffect(() => {
+//     const unSubscribe = onAuthStateChangedListener((user) => {
+//         if (user) {
+//             createUserDocumentFromAuth(user)
+//         }
+//         dispatch(setCurrentUser(user))
+//     })
 
-  const dispatch = useDispatch();
+//     return unSubscribe
+// }, [])
+
+  //const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(checkUserSession())

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { signOutUser } from "../../utils/firebase/firebase.util";
+//import { signOutUser } from "../../utils/firebase/firebase.util";
 
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
 import CartIcon from "../../components/cart-icon/cart-icon.component";

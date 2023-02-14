@@ -8,6 +8,7 @@ import {CheckoutContainer, CheckoutHeader, HeaderBlock, Total} from './checkout.
 
 
 const Checkout = () => {
+    //const cartItems = useSelector(selectCartItems)
 
     const cartItems = useSelector(selectCartItems)
     const cartTotal = useSelector(selectCartTotal)
