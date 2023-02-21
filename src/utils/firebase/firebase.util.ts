@@ -105,7 +105,7 @@ export type UserData = {
     displayName: string;
 }
 
-export const createUserDocumentFromAuth = async (userAuth: User, additionalInformation: AdditionalInformation): Promise<void | QueryDocumentSnapshot<UserData>> => {
+export const createUserDocumentFromAuth = async (userAuth: User, additionalInformation?: AdditionalInformation): Promise<void | QueryDocumentSnapshot<UserData>> => {
     if (!userAuth) return
 
     const userDocRef = doc(db, 'users', userAuth.uid);

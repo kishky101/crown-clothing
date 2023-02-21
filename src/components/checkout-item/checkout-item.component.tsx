@@ -1,6 +1,6 @@
 // import { useContext } from 'react';
 // import { CartDropdownContext } from '../../context/cart-dropdown.context';
-import React from 'react';
+import {FC} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { addItemToCart, removeItemFromCart, cartItemToDelete } from '../../store/cart/cart.action'
@@ -15,9 +15,13 @@ import {
     Value,
     CheckoutRemoveButton 
 } from './checkout-item.styles'
+import { CartItemType } from '../../store/cart/cart.types';
 
+type CheckoutItemProp = {
+    product: CartItemType
+}
 
-const CheckoutItem = ({product}) => {
+const CheckoutItem: FC<CheckoutItemProp> = ({product}) => {
     const dispatch = useDispatch()
     const cartItems = useSelector(selectCartItems)
     //const { addItemToCart, removeItemFromCart, cartItemToDelete } = cart

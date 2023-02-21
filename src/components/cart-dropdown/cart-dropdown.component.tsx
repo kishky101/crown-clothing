@@ -1,4 +1,3 @@
-import React, {MouseEvent} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { setIsCartOpen } from '../../store/cart/cart.action';
@@ -21,8 +20,7 @@ const CartDropdown = () => {
 
     const navigate = useNavigate()
 
-    const goToCheckout = (e : MouseEvent<HTMLButtonElement>): void => {
-        e.preventDefault()
+    const goToCheckout = (): void => {
         navigate('/checkout')
         dispatch(setIsCartOpen(false))
     }

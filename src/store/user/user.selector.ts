@@ -8,4 +8,5 @@ export const selectUserReducer = (state: RootState): UserState => state.user;
 
 export const SelectCurrentUser = createSelector(
     [selectUserReducer],
-    (user) => user.currentUser)
+    (user) => user.currentUser
+)

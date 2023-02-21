@@ -1,5 +1,6 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { useDispatch } from "react-redux";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 //import { signInUserWithEmailAndPassword, signInWithGooglePopup } from "../../utils/firebase/firebase.util";
@@ -33,11 +34,12 @@ const SignInForm = () => {
             dispatch(emailSignInStart(email, password));
             resetFormField()
         } catch (error) {
-            switch(error.code) {
-                case 'auth/wrong-password':
+
+            switch((error as AuthError).code) {
+                case AuthErrorCodes.INVALID_PASSWORD:
                     alert('Incorrect Password')
                     break;
-                case 'auth/user-not-found':
+                case AuthErrorCodes.INVALID_EMAIL:
                     alert('No user assosiated with this email')
                     break;
                 default :
