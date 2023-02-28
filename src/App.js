@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import { GlobalStyles } from "./global.styles";
 
 // import { 
 //   onAuthStateChangedListener, 
@@ -8,29 +9,18 @@ import { Route, Routes } from "react-router-dom";
 //   getCurrentUser 
 // } from "./utils/firebase/firebase.util";
 import { checkUserSession } from "./store/user/user.action";
-import Home from "./routes/home/home.component";
-import Navigation from "./routes/navigation/navigation.component";
-import Authentication from "./routes/authentication/authentication.component";
-import Shop from "./routes/shop/shop.component";
-import Checkout from "./routes/checkout/checkout.component";
+import Spinner from "./components/spinner/spinner.component";
+
+
+const Home =  lazy(() => import("./routes/home/home.component"));
+const Navigation =  lazy(() => import("./routes/navigation/navigation.component"));
+const Authentication =  lazy(() => import("./routes/authentication/authentication.component"));
+const Shop =  lazy(() => import("./routes/shop/shop.component"));
+const Checkout =  lazy(() => import("./routes/checkout/checkout.component"));
 
 
 const App = () => {
   const dispatch = useDispatch()
-  
-//   useEffect(() => {
-//     const unSubscribe = onAuthStateChangedListener((user) => {
-//         if (user) {
-//             createUserDocumentFromAuth(user)
-//         }
-//         dispatch(setCurrentUser(user))
-//     })
-
-//     return unSubscribe
-// }, [])
-
-  //const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(checkUserSession())
   })
@@ -47,14 +37,17 @@ const App = () => {
   // })
 
   return (
-    <Routes>
-      <Route path="/" element= {<Navigation />} >
-        <Route index element= {<Home />} />
-        <Route path="shop/*" element= {<Shop/>}/>
-        <Route path="authentication" element= {<Authentication/>} />
-        <Route path="checkout" element= {<Checkout />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<Spinner />}>
+      <GlobalStyles />
+      <Routes>
+        <Route path="/" element= {<Navigation />} >
+          <Route index element= {<Home />} />
+          <Route path="shop/*" element= {<Shop/>}/>
+          <Route path="authentication" element= {<Authentication/>} />
+          <Route path="checkout" element= {<Checkout />} />
+        </Route>
+      </Routes>
+    </Suspense>
   )
   
 }

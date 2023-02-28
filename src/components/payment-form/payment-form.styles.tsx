@@ -13,9 +13,26 @@ export const PaymentFormContainer = styled.div`
 export const FormContainer = styled.form`
     height: 100px;
     min-width: 500px;
+
+    @media screen and (max-width:800px) {
+        margin: 1rem auto;
+
+        h2 {
+           text-align: center;
+        }
+
+        .card {
+            width: 80%;
+            margin: 1rem auto;
+        }
+    }
 `
 
 export const PaymentButton = styled(Button)`
     margin-left: auto;
     margin-top: 30px;
+
+    @media screen and (max-width:800px) {
+        margin: 1rem auto;
+    }
 `

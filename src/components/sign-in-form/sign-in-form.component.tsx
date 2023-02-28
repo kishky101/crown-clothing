@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
@@ -19,7 +20,8 @@ const defaultSignInFields: DefaultSignInFields = {
 }
 
 const SignInForm = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [signInFields, setSignInFields] = useState(defaultSignInFields);
 
     const {email, password} =  signInFields;
@@ -33,6 +35,7 @@ const SignInForm = () => {
         try {
             dispatch(emailSignInStart(email, password));
             resetFormField()
+            navigate('/')
         } catch (error) {
 
             switch((error as AuthError).code) {
@@ -51,6 +54,7 @@ const SignInForm = () => {
     
     const logGoogleUser = (): void => {
         dispatch(googleSignInStart())
+        navigate('/')
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {

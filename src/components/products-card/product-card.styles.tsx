@@ -29,6 +29,16 @@ export const ProductCartContainer = styled.div`
       display: flex;
     }
   }
+
+  @media screen and (max-width: 800px) {
+    max-width: 20rem;
+    min-height: 10rem;
+
+    button {
+      display: block;
+      opacity: 0.9;
+    }
+  }
 `;
 
 export const Footer = styled.div`
