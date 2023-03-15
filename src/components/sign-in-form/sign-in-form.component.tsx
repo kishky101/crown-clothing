@@ -37,7 +37,6 @@ const SignInForm = () => {
             resetFormField()
             navigate('/')
         } catch (error) {
-
             switch((error as AuthError).code) {
                 case AuthErrorCodes.INVALID_PASSWORD:
                     alert('Incorrect Password')
