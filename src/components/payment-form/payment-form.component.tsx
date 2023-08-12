@@ -64,6 +64,8 @@ const PaymentForm = () => {
         } else {
             if (paymentResult.paymentIntent.status === 'succeeded') {
                 alert('Payment Successful')
+                localStorage.clear();
+                window.location.reload();
             }
         }
     };
