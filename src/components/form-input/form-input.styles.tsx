@@ -19,7 +19,7 @@ export const FormInputLabel = styled.label<FormInputLabelProps>`
   font-weight: normal;
   position: absolute;
   pointer-events: none;
-  left: 5px;
+  left: 15px;
   top: 10px;
   transition: 300ms ease all;
   ${({ shrink }) => shrink && shrinkLabelStyles};
@@ -30,12 +30,12 @@ export const Input = styled.input`
   background-color: white;
   color: ${subColor};
   font-size: 18px;
-  padding: 10px 10px 10px 5px;
+  padding: 15px 10px 10px;
   display: block;
   width: 100%;
   border: none;
-  border-radius: 0;
-  border-bottom: 1px solid ${subColor};
+  border-radius: 10px;
+  // border-bottom: 1px solid ${subColor};
   margin: 25px 0;
   &:focus {
     outline: none;

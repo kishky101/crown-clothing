@@ -8,15 +8,16 @@ import {
 
 export const CartDropdownContainer = styled.div`
   position: absolute;
-  width: 240px;
+  width: 250px;
   height: 340px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  border: 1px solid black;
+  padding: 15px;
+  border: 1px solid grey;
+  border-radius: 8px;
   background-color: white;
   top: 90px;
-  right: 40px;
+  right: 30px;
   z-index: 5;
 
   ${BaseButton}, 

@@ -1,9 +1,9 @@
-import { Category } from "./categories.types";
+import { newCategoryItem } from "./categories.types";
 import { AnyAction } from "redux";
 import { fetchCategoriesStart, fetchCategoriesSuccess, fetchCategoriesFailed } from "./categories.action";
 
 export type CategoriesState = {
-    readonly categories: Category[];
+    readonly categories: newCategoryItem[];
     readonly isLoading: boolean;
     readonly error: Error | null; 
 } 

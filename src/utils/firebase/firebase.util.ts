@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { Category } from "../../store/categories/categories.types";
+// import { Category } from "../../store/categories/categories.types";
 import { 
     getAuth,
     signInWithPopup, 
@@ -81,19 +81,19 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd> (collecti
     console.log('done')
 }
 
-export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
-    const collectionRef = collection(db, 'categories');
-    const q = query(collectionRef);
+// export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
+//     const collectionRef = collection(db, 'categories');
+//     const q = query(collectionRef);
 
-    const querySnapshot = await getDocs(q);
-    return  querySnapshot.docs.map(docSnapshot => docSnapshot.data() as Category)
-    //     reduce((acc, docSnapshot) => {
-    //     const {title, items} = docSnapshot.data();
-    //     acc[title.toLowerCase()] = items;
-    //     return acc;
-    // }, {})
+//     const querySnapshot = await getDocs(q);
+//     return  querySnapshot.docs.map(docSnapshot => docSnapshot.data() as Category)
+//     //     reduce((acc, docSnapshot) => {
+//     //     const {title, items} = docSnapshot.data();
+//     //     acc[title.toLowerCase()] = items;
+//     //     return acc;
+//     // }, {})
 
-}
+// }
 
 export type AdditionalInformation = {
     displayName?: string;

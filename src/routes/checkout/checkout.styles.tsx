@@ -2,12 +2,15 @@ import styled from "styled-components";
 
 
 export const CheckoutContainer = styled.div`
-  width: 55%;
-  min-height: 90vh;
+  // width: 55%;
+  max-width: 1000px;
+  // min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto 0;
+  justify-content: center;
+  padding: 20px;
+  margin: calc(100vh - (100vh - 70px) + 30px) auto 0;
 `;
 
 export const CheckoutHeader = styled.div`
@@ -27,6 +30,12 @@ export const HeaderBlock = styled.div`
     width: 8%;
   }
 `;
+
+export const CheckOutItemCont = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`
 
 export const Total = styled.span`
   margin-top: 30px;

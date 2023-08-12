@@ -5,7 +5,7 @@ import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector
 //import { CartDropdownContext } from '../../context/cart-dropdown.context';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import PaymentForm from '../../components/payment-form/payment-form.component';
-import {CheckoutContainer, CheckoutHeader, HeaderBlock, Total} from './checkout.styles'
+import {CheckoutContainer, CheckoutHeader, HeaderBlock, CheckOutItemCont, Total} from './checkout.styles'
 
 
 
@@ -20,7 +20,7 @@ const Checkout = () => {
 
     return (
         <CheckoutContainer>
-            <CheckoutHeader>
+            {/* <CheckoutHeader>
                 <HeaderBlock>
                     <span>Product</span>
                 </HeaderBlock>
@@ -36,10 +36,10 @@ const Checkout = () => {
                 <HeaderBlock>
                     <span>Remove</span>
                 </HeaderBlock>
-            </CheckoutHeader>
-            <div>
+            </CheckoutHeader> */}
+            <CheckOutItemCont>
                 {cartItems.map(item => <CheckoutItem product={item} key={item.id} />)}
-            </div>
+            </CheckOutItemCont>
             <Total>Total: ${cartTotal}</Total>
 
             <PaymentForm />

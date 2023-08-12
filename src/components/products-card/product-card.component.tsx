@@ -20,7 +20,7 @@ const ProductCard: FC<ProductCardProp> = ({product}) => {
     const {name, imageUrl, price} = product
     const cartItems = useSelector(selectCartItems)
     //const { addItemToCart } = useContext(CartDropdownContext);
-    const addProductToCart = () => dispatch(addItemToCart(cartItems, product as CartItemType))
+    const addProductToCart = () => dispatch(addItemToCart(cartItems, product as unknown as CartItemType))
     return (
         <ProductCartContainer>
             <img src={imageUrl} alt = {`${name}`}/>

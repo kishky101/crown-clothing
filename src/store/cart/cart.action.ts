@@ -1,7 +1,7 @@
 import { createAction, ActionWithPayload, withMatch } from "../../utils/reducer/reducer.utils";
 import { CART_ACTION_TYPES } from "./cart.types";
 
-import { CategoryItem } from "../categories/categories.types";
+import { newCategoryItem } from "../categories/categories.types";
 import { CartItemType } from "./cart.types";
 
 
@@ -11,7 +11,7 @@ export type SetCartItems = ActionWithPayload<CART_ACTION_TYPES.SET_CART_ITEMS, C
 
 
 
-const addCartItem = (cartItems: CartItemType[], productToAdd: CategoryItem): CartItemType[] => {
+const addCartItem = (cartItems: CartItemType[], productToAdd: newCategoryItem): CartItemType[] => {
 
     const existingCartItem = cartItems.find((cartItem) => cartItem.id === productToAdd.id)
 

@@ -1,11 +1,13 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
 //import { createAuthUserFromEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.util";
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
-import { userSignUpStart } from "../../store/user/user.action";
-import {SignUpContainer, SignUpHeader} from './sign-up-form.styles'
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import { googleSignInStart, userSignUpStart } from "../../store/user/user.action";
+import { SelectCurrentUser } from "../../store/user/user.selector";
+import {SignUpContainer, SignUpHeader, SignUpLink, SignUpButtonContainer} from './sign-up-form.styles'
 import { DefaultSignInFields } from "../sign-in-form/sign-in-form.component";
 
 
@@ -22,6 +24,8 @@ const defaultFormFields: DefaultFormFields = {
 }
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const currentUser = useSelector(SelectCurrentUser);
     const [formField, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formField;
     
@@ -50,6 +54,10 @@ const SignUp = () => {
         }
     }
 
+    const logGoogleUser = (): void => {
+        dispatch(googleSignInStart())
+    }
+
     const resetFormField = (): void => {
         setFormFields(defaultFormFields)
     }
@@ -59,6 +67,10 @@ const SignUp = () => {
         
         setFormFields({...formField, [name] : value})
     }
+
+    useEffect(() => {
+        if(currentUser) return navigate('/')
+    }, [currentUser])
 
     return (
         <SignUpContainer>
@@ -97,8 +109,14 @@ const SignUp = () => {
                     value={confirmPassword} 
                     required
                 />
-                <Button type='submit'>Sign up</Button>
+                <SignUpButtonContainer>
+                    <Button type='submit'>Sign up</Button>
+                    <Button type='button' onClick={logGoogleUser} buttonTypes={BUTTON_TYPE_CLASSES.google}>google sign in</Button>
+                </SignUpButtonContainer>
             </form>
+            <SignUpLink>
+                <p>Already have an account? <span onClick={() => navigate('/login')}>Sign In</span></p>
+            </SignUpLink>
         </SignUpContainer>
     )
 }

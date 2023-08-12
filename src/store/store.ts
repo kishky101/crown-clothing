@@ -2,7 +2,7 @@ import { legacy_createStore as createStore, compose,  applyMiddleware, Middlewar
 import { persistStore, persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 //import thunk from "redux-thunk";
-//import logger from "redux-logger";
+// import logger from "redux-logger";
 import createSagaMiddleware from "@redux-saga/core";
 import { loggerMiddleWare } from "./middleware/logger";
 

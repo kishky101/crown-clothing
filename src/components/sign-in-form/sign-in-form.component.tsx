@@ -1,12 +1,13 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect,  ChangeEvent, FormEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 //import { signInUserWithEmailAndPassword, signInWithGooglePopup } from "../../utils/firebase/firebase.util";
 import { googleSignInStart,  emailSignInStart } from "../../store/user/user.action";
-import {SignInContainer, SignInHeader, SignInButtonContainer} from './sign-in-form.styles'
+import { SelectCurrentUser } from "../../store/user/user.selector";
+import {SignInContainer, SignInHeader, SignInButtonContainer, SignInLink } from './sign-in-form.styles'
 
 
 export interface DefaultSignInFields {
@@ -22,7 +23,11 @@ const defaultSignInFields: DefaultSignInFields = {
 const SignInForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const currentUser  = useSelector(SelectCurrentUser)
+
     const [signInFields, setSignInFields] = useState(defaultSignInFields);
+    console.log(signInFields)
 
     const {email, password} =  signInFields;
 
@@ -42,7 +47,7 @@ const SignInForm = () => {
                     alert('Incorrect Password')
                     break;
                 case AuthErrorCodes.INVALID_EMAIL:
-                    alert('No user assosiated with this email')
+                    alert('No user associated with this email')
                     break;
                 default :
                     console.log(error)
@@ -52,8 +57,7 @@ const SignInForm = () => {
     }
     
     const logGoogleUser = (): void => {
-        dispatch(googleSignInStart())
-        navigate('/')
+        dispatch(googleSignInStart());
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -61,6 +65,10 @@ const SignInForm = () => {
 
         setSignInFields({...signInFields, [name]: value})
     }
+
+    useEffect(() => {
+        if(currentUser) return navigate('/')
+    }, [currentUser])
     return (
         <SignInContainer>
             <SignInHeader>I already have an account</SignInHeader>
@@ -87,6 +95,9 @@ const SignInForm = () => {
                     <Button type='button' onClick={logGoogleUser} buttonTypes={BUTTON_TYPE_CLASSES.google}>google sign in</Button>
                 </SignInButtonContainer>
             </form>
+            <SignInLink>
+                <p>Don't have an account yet? <span onClick={() => navigate('/signup')}>Sign Up</span></p>
+            </SignInLink>
         </SignInContainer>
     )
 }

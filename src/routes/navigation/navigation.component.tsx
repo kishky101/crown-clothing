@@ -36,13 +36,13 @@ const Navigation = () => {
                 <CrownLogo className="logo" />
             </LogoContainer>
             <NavLinks>
-                <NavLink to='Shop'>
+                {/* <NavLink to='Shop'>
                     SHOP
-                </NavLink>
+                </NavLink> */}
                 {currentUser? 
                     <NavLink as='span' onClick={signOutHandler}>SIGN OUT</NavLink>:
                     (
-                        <NavLink to='authentication'>
+                        <NavLink to='/login'>
                             SIGN IN
                         </NavLink>
                     )

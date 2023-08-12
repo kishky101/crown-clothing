@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import CategoriesPreview from "../categories-preview/categories-preview.component";
 import Category from "../category/category.component";
 import { fetchCategoriesStart } from "../../store/categories/categories.action";
+import ProductDetails from "../../components/product-details/product-details.component";
 
 const Shop = () => {
     const dispatch = useDispatch()
@@ -20,14 +21,15 @@ const Shop = () => {
 
     // const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(fetchCategoriesStart());
-    }, [])
+    // useEffect(() => {
+    //     dispatch(fetchCategoriesStart());
+    // }, [])
 
     return (
         <Routes>
             <Route index element= {<CategoriesPreview />} />
             <Route path=":category" element= {<Category />} />
+            {/* <Route path=":id" element= {<ProductDetails />} /> */}
         </Routes>
     )
 }
