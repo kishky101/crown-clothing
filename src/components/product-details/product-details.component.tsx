@@ -42,12 +42,10 @@ const ProductDetails: React.FC<ProductType> = () => {
     rating: { rate: 0, count: 0 },
     category: "",
   });
-  // console.log(product)
+
   const { productId } = useParams<ProductRouteParam>();
   const products = useSelector(selectCategories);
   const cartItems = useSelector(selectCartItems);
-  // debugger
-  // const { image, description, title, price, rating } = product;
 
   const addItemHandler = () => dispatch(addItemToCart(cartItems, product as unknown as CartItemType));
   const removeItemHandler = () => dispatch(removeItemFromCart(cartItems, product as unknown as CartItemType));

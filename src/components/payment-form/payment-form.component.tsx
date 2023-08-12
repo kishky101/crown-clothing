@@ -1,7 +1,7 @@
 import { useState, FormEvent } from "react";
 import { useSelector } from "react-redux";
-import { CardElement, useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
-import { StripeCardElement, StripePaymentElementOptions } from "@stripe/stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { StripeCardElement } from "@stripe/stripe-js";
 
 import { selectCartTotal } from "../../store/cart/cart.selector";
 import { SelectCurrentUser } from "../../store/user/user.selector";
