@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCategories } from "../../store/categories/categories.selector";
 import { ProductType } from "../product-card/product-card.component";
@@ -30,16 +30,9 @@ type ProductRouteParam = {
 
 
 const ProductDetails: React.FC<ProductType> = () => {
-  // const defaultProduct = {
-  //   id: 0,
-  //   image: "",
-  //   description: "",
-  //   title: "",
-  //   price: 0,
-  //   rating: { rate: 0, count: 0 },
-  //   category: "",
-  // };
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<newCategoryItem>({
     id: 0,
     image: "",
@@ -58,6 +51,11 @@ const ProductDetails: React.FC<ProductType> = () => {
 
   const addItemHandler = () => dispatch(addItemToCart(cartItems, product as unknown as CartItemType));
   const removeItemHandler = () => dispatch(removeItemFromCart(cartItems, product as unknown as CartItemType));
+
+  const buyNowHandler = () => {
+    addItemHandler();
+    navigate('/checkout')
+  }
   useEffect(() => {
     const filterProduct = products.filter(
       (product) => product.id === Number(productId)
@@ -118,7 +116,7 @@ const ProductDetails: React.FC<ProductType> = () => {
               </span>
             </ProductDetailsQuant>
             <ProductDetailsButtons>
-              <Button>Buy now</Button>
+              <Button onClick={buyNowHandler}>Buy now</Button>
               <Button onClick={addItemHandler}>Add to Cart</Button>
             </ProductDetailsButtons>
           </ProductDetailsText>
