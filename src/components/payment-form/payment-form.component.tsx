@@ -78,7 +78,7 @@ const PaymentForm = () => {
                     <Chip src={CardChip} alt='chip' />
                     <CardNumber><span>4242</span> <span>4242</span> <span>4242</span> <span>4242</span></CardNumber>
                     <ExpiryDate>
-                        <p><span>Valid Thru</span> <span>04 / 24</span></p>
+                        <p><span>Valid Thru</span> <span>04 / 26</span></p>
                     </ExpiryDate>
                     <Cvc>
                         <p><span>CVC</span> <span>343</span> </p>
