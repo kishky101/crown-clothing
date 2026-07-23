@@ -1,14 +1,14 @@
-# Face Recognition
+# Crown Clothing
 
 <p align="center">
-  <h1 align="center">Face Recognition</h1>
+  <h1 align="center">Crown Clothing</h1>
 
   <p align="center">
-    A full-stack web application that detects human faces in images using the Clarifai Face Detection API.
+    A modern e-commerce platform built with React, Redux Toolkit, Firebase Authentication, Stripe, and TypeScript.
   </p>
 
   <p align="center">
-    Built with <strong>React</strong>, <strong>Node.js</strong>, <strong>Express</strong>, <strong>PostgreSQL</strong>, <strong>Knex.js</strong>, and <strong>Clarifai</strong>.
+    Designed to demonstrate scalable frontend architecture, centralized state management, secure authentication, and payment processing.
   </p>
 </p>
 
@@ -16,65 +16,75 @@
 
 # Overview
 
-Face Recognition is a full-stack application that allows users to create an account, sign in securely, and detect faces in images by submitting publicly accessible image URLs.
+Crown Clothing is a full-stack-inspired e-commerce application that simulates the shopping experience of a modern online retail platform.
 
-The application integrates the Clarifai Face Detection API to identify facial regions while maintaining user accounts and tracking the total number of successful image detections. It demonstrates a complete client-server architecture with authentication, REST APIs, database persistence, and third-party API integration.
+The application enables users to browse products by category, authenticate using Firebase, manage a persistent shopping cart, and complete payments securely through Stripe.
 
-This project showcases practical backend development, API consumption, state management, database interaction, and frontend visualization.
+The project showcases scalable React architecture, centralized state management with Redux Toolkit, reusable UI components, route-based code organization, Firebase integration, and responsive user interface design.
 
 ---
 
 # Features
 
-### User Authentication
+## Authentication
 
 - User registration
 - User sign in
-- Password hashing with bcrypt
-- Persistent user profiles
+- Google Authentication
+- Firebase Authentication
+- Persistent sessions
 
-### Face Detection
+---
 
-- Submit image URLs
-- Detect faces using Clarifai
-- Display bounding boxes
-- Multiple face support (API dependent)
+## Shopping Experience
 
-### User Profiles
+- Browse product categories
+- Product detail browsing
+- Shopping cart
+- Quantity management
+- Checkout experience
 
-- Track image submissions
-- Display user ranking
-- Store user information
-- Update detection count
+---
 
-### Backend API
+## Payments
 
-- RESTful Express API
-- PostgreSQL database
-- Knex query builder
-- Third-party API integration
+- Secure Stripe integration
+- Payment processing
+- Checkout workflow
 
-### User Experience
+---
+
+## User Experience
 
 - Responsive interface
-- Animated background
-- Interactive UI components
-- Clean navigation
+- Modern navigation
+- Dynamic shopping cart
+- Loading states
+- Clean product browsing
+
+---
+
+## State Management
+
+- Redux Toolkit
+- Redux Persist
+- Memoized selectors
+- Global application state
 
 ---
 
 # Technical Highlights
 
-- Full-stack architecture
-- React frontend
-- Express REST API
-- PostgreSQL persistence
-- Knex query builder
-- Clarifai AI integration
-- Password hashing
-- Modular backend controllers
-- Component-based frontend
-- Separation of frontend and backend
+- React 18
+- TypeScript
+- Redux Toolkit
+- Firebase Authentication
+- Cloud Firestore
+- Stripe Payments
+- React Router v6
+- Styled Components
+- Component-driven architecture
+- Scalable folder organization
 
 ---
 
@@ -87,32 +97,27 @@ User
 
 subgraph Frontend
 React
+Redux
 Components
 end
 
-subgraph Backend
-Express
-Controllers
-Knex
-end
-
-subgraph Database
-PostgreSQL
-end
-
-subgraph External
-Clarifai
+subgraph Backend Services
+Firebase
+Firestore
+Stripe
 end
 
 User --> React
 
-React --> Express
+React --> Components
 
-Express --> Controllers
+Components --> Redux
 
-Controllers --> PostgreSQL
+Redux --> Firestore
 
-Controllers --> Clarifai
+Components --> Firebase
+
+Components --> Stripe
 ```
 
 ---
@@ -122,39 +127,33 @@ Controllers --> Clarifai
 ```mermaid
 flowchart LR
 
-User --> Register
+Visitor
 
-Register --> Database
+Visitor --> Firebase
 
-User --> Login
+Firebase --> Authenticated
 
-Login --> Express
+Authenticated --> Store
 
-Express --> Database
-
-Database --> Authenticated
-
-Authenticated --> Dashboard
+Store --> Checkout
 ```
 
 ---
 
-# Face Detection Flow
+# Checkout Flow
 
 ```mermaid
 flowchart LR
 
-ImageURL --> React
+Browse
 
-React --> Express
+Browse --> Cart
 
-Express --> Clarifai
+Cart --> Checkout
 
-Clarifai --> FaceCoordinates
+Checkout --> Stripe
 
-FaceCoordinates --> React
-
-React --> BoundingBoxes
+Stripe --> PaymentSuccess
 ```
 
 ---
@@ -163,84 +162,123 @@ React --> BoundingBoxes
 
 ## Frontend
 
-- React
-- Vite
-- Tachyons
-- React Parallax Tilt
-- Particles Background
+- React 18
+- TypeScript
+- React Router v6
+- Styled Components
 
-## Backend
+## State Management
 
-- Node.js
-- Express
+- Redux Toolkit
+- Redux Persist
+- Reselect
 
-## Database
+## Backend Services
 
-- PostgreSQL
-- Knex.js
+- Firebase Authentication
+- Cloud Firestore
 
-## Authentication
+## Payments
 
-- bcrypt-nodejs
+- Stripe
 
-## External APIs
+## Tooling
 
-- Clarifai Face Detection API
+- Jest
+- React Testing Library
+- ESLint
 
 ---
 
 # Project Structure
 
 ```
-face-recognition/
-
-├── face-recognition-app/
-│   ├── src/
-│   ├── components/
-│   ├── App.jsx
-│   └── package.json
+src/
 │
-├── face-recognition-api/
-│   ├── controllers/
-│   ├── server.js
-│   └── package.json
+├── assets/
+├── components/
+├── context/
+├── routes/
+├── store/
+├── utils/
+├── App.js
+└── index.js
 ```
 
 ### Directory Overview
 
 | Directory | Purpose |
 |------------|----------|
-| `face-recognition-app` | React frontend |
-| `face-recognition-api` | Express backend |
-| `controllers` | Business logic for authentication, profiles, and image processing |
+| `components` | Reusable UI components |
+| `routes` | Route-based application pages |
+| `store` | Redux slices, selectors, and store configuration |
+| `utils` | Firebase, Stripe, and shared utilities |
+| `context` | Shared React context where applicable |
+| `assets` | Images and static resources |
 
 ---
 
-# Backend API
+# Application Architecture
 
-| Method | Endpoint | Description |
-|----------|----------|-------------|
-| POST | `/signin` | Authenticate a user |
-| POST | `/register` | Create a new account |
-| GET | `/profile/:id` | Retrieve a user profile |
-| PUT | `/image` | Increment image submission count |
-| POST | `/imageurl` | Send image to Clarifai API |
+The application follows a feature-oriented architecture that separates presentation, routing, business logic, and state management.
+
+Core responsibilities include:
+
+- UI rendering through reusable React components
+- Centralized application state with Redux Toolkit
+- Authentication handled by Firebase
+- Product data stored in Firestore
+- Secure payment processing with Stripe
+
+This separation improves maintainability and allows individual features to evolve independently.
+
+---
+
+# State Management
+
+Application state is managed using Redux Toolkit.
+
+Global state includes:
+
+- Current user
+- Shopping cart
+- Product categories
+- UI state
+
+Selectors are used to efficiently derive computed state while minimizing unnecessary re-renders.
+
+---
+
+# Authentication
+
+User authentication is managed through Firebase Authentication.
+
+Supported methods include:
+
+- Email and password
+- Google Sign-In
+
+Authenticated user information is synchronized with the application state and persisted across sessions.
 
 ---
 
 # Database Overview
 
-The application stores user information in PostgreSQL.
+Cloud Firestore stores:
 
-Typical user data includes:
+- Product collections
+- Product categories
+- User profiles
 
-- Name
-- Email
-- Password hash
-- Join date
-- Image submission count
+The frontend retrieves product data dynamically, allowing inventory to be managed independently of the application code.
 
-The backend uses Knex.js to manage database queries and updates.
+---
+
+# Payment Processing
+
+Payments are processed securely using Stripe.
+
+Sensitive payment information is never handled directly by the frontend and is delegated to Stripe's payment infrastructure.
 
 ---
 
@@ -249,63 +287,55 @@ The backend uses Knex.js to manage database queries and updates.
 Clone the repository.
 
 ```bash
-git clone https://github.com/kishky101/face-recognition.git
+git clone https://github.com/kishky101/crown-clothing.git
 ```
 
-Install frontend dependencies.
+Navigate into the project.
 
 ```bash
-cd face-recognition-app
+cd crown-clothing
+```
+
+Install dependencies.
+
+```bash
 npm install
 ```
 
-Install backend dependencies.
-
-```bash
-cd ../face-recognition-api
-npm install
-```
-
-Start the backend.
+Start the development server.
 
 ```bash
 npm start
-```
-
-Start the frontend.
-
-```bash
-npm run dev
 ```
 
 ---
 
 # Environment Variables
 
-Configure the backend with the following variables.
+Create a `.env` file and configure the required credentials.
 
 ```env
-DATABASE_HOST=
+REACT_APP_FIREBASE_API_KEY=
 
-DATABASE_PORT=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
 
-DATABASE_USER=
+REACT_APP_FIREBASE_PROJECT_ID=
 
-DATABASE_PASSWORD=
+REACT_APP_FIREBASE_STORAGE_BUCKET=
 
-DATABASE_NAME=
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
 
-CLARIFAI_API_KEY=
+REACT_APP_FIREBASE_APP_ID=
+
+REACT_APP_STRIPE_PUBLISHABLE_KEY=
 ```
 
 ---
 
 # Available Scripts
 
-## Frontend
-
 ```bash
-npm run dev
+npm start
 ```
 
 Runs the development server.
@@ -314,101 +344,102 @@ Runs the development server.
 npm run build
 ```
 
-Creates a production build.
+Builds the application for production.
 
 ```bash
-npm run preview
+npm test
 ```
 
-Serves the production build locally.
-
-## Backend
-
-```bash
-npm start
-```
-
-Starts the Express server using Nodemon.
+Runs the test suite.
 
 ---
 
 # Engineering Decisions
 
-### React Component Architecture
+### Redux Toolkit
 
-The frontend is divided into reusable UI components responsible for navigation, registration, authentication, ranking, image submission, and face visualization.
+Redux Toolkit centralizes application state while reducing boilerplate and improving maintainability through slices and modern Redux patterns.
 
-### Express Controllers
+### Firebase
 
-Business logic is separated into dedicated controllers, improving maintainability and keeping routing concerns isolated.
+Firebase provides authentication and cloud-hosted data storage without requiring a custom backend, allowing the application to focus on frontend architecture.
 
-### PostgreSQL + Knex
+### React Router
 
-Knex provides database abstraction while retaining SQL flexibility, making queries easier to maintain and extend.
+React Router v6 enables route-based application structure with clear separation between authentication, shopping, and checkout experiences.
 
-### Clarifai Integration
+### Styled Components
 
-Rather than performing machine learning locally, the application delegates face detection to Clarifai, demonstrating practical third-party AI service integration.
+Component-scoped styling improves modularity and prevents style leakage while supporting reusable UI patterns.
+
+### Stripe
+
+Stripe was chosen to demonstrate integration with an industry-standard payment platform while maintaining secure payment handling.
 
 ---
 
 # Performance Considerations
 
-- Modular backend architecture
-- Stateless REST API
-- Client-side rendering with React
-- Lightweight API requests
-- Efficient database updates for user rankings
+- Memoized Redux selectors
+- Optimized component rendering
+- Route-based code organization
+- Centralized state updates
+- Efficient Firestore data fetching
 
 ---
 
 # Security Considerations
 
-- Password hashing using bcrypt
-- Credentials stored securely in PostgreSQL
-- API keys managed through environment variables
-- Authentication handled server-side
+- Firebase Authentication
+- Protected checkout flow
+- Secure Stripe payment processing
+- Environment variables for API credentials
+- Authentication state validation
 
 ---
 
 # Testing
 
-Automated testing has not been implemented.
-
-Recommended additions:
+The project includes support for:
 
 - Jest
-- Supertest
 - React Testing Library
-- GitHub Actions
+
+Future improvements could include:
+
+- Cypress
+- Playwright
+- End-to-end checkout testing
 
 ---
 
 # Deployment
 
-The project can be deployed by hosting:
+The application can be deployed using:
 
-- React frontend on Vercel or Netlify
-- Express backend on Render, Railway, or Fly.io
-- PostgreSQL using a managed database provider
+- Vercel
+- Netlify
 
-A valid Clarifai API key is required for face detection.
+Required services:
+
+- Firebase Project
+- Cloud Firestore
+- Stripe Account
 
 ---
 
 # Future Improvements
 
-- Drag-and-drop image uploads
-- Upload images directly from local storage
-- JWT authentication
-- Refresh tokens
-- User avatars
-- Detection history
-- Image gallery
+- Product search
+- Product reviews
+- Wishlist functionality
+- Order history
+- Admin dashboard
+- Inventory management
+- Discount codes
+- Address management
 - Docker support
-- CI/CD pipeline
-- End-to-end testing
-- Face recognition history dashboard
+- GitHub Actions CI/CD
 
 ---
 
@@ -428,12 +459,13 @@ This project is licensed under the MIT License.
 
 # Acknowledgements
 
-This project uses several excellent open-source technologies and services:
+This project is powered by several outstanding technologies:
 
 - React
-- Express
-- PostgreSQL
-- Knex.js
-- Clarifai
-- Tachyons
-- Vite
+- Redux Toolkit
+- Firebase
+- Cloud Firestore
+- Stripe
+- Styled Components
+- React Router
+- TypeScript
