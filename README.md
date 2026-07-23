@@ -10,6 +10,10 @@
   <p align="center">
     Designed to demonstrate scalable frontend architecture, centralized state management, secure authentication, and payment processing.
   </p>
+
+  <p align="center">
+    🚀 <a href="https://crown-clothingreact.netlify.app/"><strong>Live Demo</strong></a>
+  </p>
 </p>
 
 ---
